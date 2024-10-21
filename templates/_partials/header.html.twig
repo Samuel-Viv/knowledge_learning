@@ -11,7 +11,13 @@
         <div class="header-nav">
 
             <ul class="liste">
-                <li><a href="{{ path('app_home') }}" class="{% if app.request.get('_route') == 'app_home'%}active{% endif%}">Accueil</a></li>    
+                <li><a href="{{ path('app_home') }}" class="{% if app.request.get('_route') == 'app_home'%}active{% endif%}">Accueil</a></li>  
+                {% if app.user %} 
+
+                {% else %}
+                <li><a href="{{ path('app_login') }}" class="{% if app.request.get('_route') == 'app_login'%}active{% endif%}">Connexion</a></li>
+                <li><a href="{{ path('app_register') }}" class="{% if app.request.get('_route') == 'app_register'%}active{% endif%}">Inscription</a></li>
+                {% endif%} 
             </ul>
 
         </div>
