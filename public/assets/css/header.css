@@ -1,0 +1,64 @@
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f1f8fc;
+}
+
+.header-logo img {
+    width: 150px !important;
+}
+
+.header-nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+.header-nav ul li {
+    display: inline;
+    text-transform: uppercase;
+}
+
+.header-nav ul li a {
+    text-decoration: none;
+    color: #0074c7;
+    font-weight:normal;
+}
+/*Style des lien en hover*/
+
+.navbar-nav .nav-link:hover {
+    color: #f1f8fc !important;
+    font-weight:bold;
+    padding: 5px;
+    border-radius: 50px;
+    border: 1px solid #00497c;
+    background-color: #00497c ;
+}
+
+/* Style des liens actifs */
+.navbar-nav .nav-link.active {
+    color: #f1f8fc !important;
+    font-weight:bold;
+    padding: 5px;
+    border-radius: 50px;
+    border: 1px solid #0074c7;
+    background-color: #0074c7 ;
+}
+
+.navbar-collapse {
+    justify-content: center; /* Aligne le menu à droite */
+}
+
+.navbar-nav {
+    width: auto;
+    text-align: center;
+}
+.navbar-nav .nav-item {
+    margin: 5px 0; /* Ajoute un espacement vertical entre les liens */
+}
+
+.navbar-nav .nav-link {
+    padding: 8px 15px; /* Diminue le padding pour éviter les liens trop larges */
+}
