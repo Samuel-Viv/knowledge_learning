@@ -16,7 +16,7 @@ class Theme
     #[ORM\Column(length: 255)]
     private ?string $name_theme = null;
 
-    public function getId(): ?int
+    public function getIdTheme(): ?int
     {
         return $this->id_theme;
     }

@@ -21,6 +21,13 @@
                 <li class="nav-item"><a href="{{ path('app_home') }}" class="nav-link {% if app.request.get('_route') == 'app_home'%}active{% endif%}">Accueil</a></li>  
 
               {% if app.user %} 
+
+              {% if 'ROLE_ADMIN' in app.user.roles %}
+              <li class="nav-item">
+                  <a href="{{ path('admin') }}" class="nav-link {% if app.request.get('_route') == 'admin' %}active{% endif %}">Admin</a>
+              </li>
+              {% endif %}
+              
               <li class="nav-item"><a href="{{ path('app_logout') }}" class="nav-link {% if app.request.get('_route') == 'app_logout'%}active{% endif%}">Déconnexion</a></li>
               {% else %}
               <li class="nav-item"><a href="{{ path('app_login') }}" class="nav-link {% if app.request.get('_route') == 'app_login'%}active{% endif%}">Connexion</a></li>
