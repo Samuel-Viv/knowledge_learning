@@ -33,6 +33,10 @@ class Lesson
     #[ORM\Column]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'Lesson')]
+    #[ORM\JoinColumn(name: "id_cursus", referencedColumnName: "id_cursus")]
+    private ?Cursus $cursus = null;
+
     public function getIdLesson(): ?int
     {
         return $this->id_lesson;
@@ -123,5 +127,17 @@ class Lesson
     public function setUpdatedAtValue(): void
     {
         $this->updatedAt = new \DateTimeImmutable();
+    }
+
+    public function getCursus(): ?Cursus
+    {
+        return $this->cursus;
+    }
+
+    public function setCursus(?Cursus $cursus): static
+    {
+        $this->cursus = $cursus;
+
+        return $this;
     }
 }

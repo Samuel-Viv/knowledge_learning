@@ -2,8 +2,10 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Cursus;
 use App\Entity\Lesson;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
@@ -50,6 +52,8 @@ class LessonCrudController extends AbstractCrudController
                 ->onlyOnIndex(),
             DateTimeField::new('updatedAt', 'Mis à jour le')
                 ->onlyOnIndex(),
+
+            CollectionField::new('cursus')
         
             
         ];
