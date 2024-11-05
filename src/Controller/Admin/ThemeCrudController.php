@@ -8,8 +8,11 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
+
 class ThemeCrudController extends AbstractCrudController
 {
+    use  Trait\ReadOnlyTrait;
+    
     public static function getEntityFqcn(): string
     {
         return Theme::class;
@@ -19,7 +22,8 @@ class ThemeCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id_theme'),
+            IdField::new('id_theme')
+                ->onlyOnIndex(),
             TextField::new('name_theme'),
         ];
     }
