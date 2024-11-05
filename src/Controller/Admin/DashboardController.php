@@ -2,13 +2,13 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Lesson;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use App\Entity\Theme;
-
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
 
@@ -35,6 +35,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoRoute('Accueil', 'fa fa-home', 'app_home');
         yield MenuItem::section('Cours');
         yield MenuItem::linkToCrud('Theme', 'fa-solid fa-folder', Theme::class);
-        
+        yield MenuItem::linkToCrud('Lesson', 'fa-solid fa-folder', Lesson::class);
     }
 }
