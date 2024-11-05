@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Cursus;
 use App\Entity\Lesson;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -35,6 +36,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoRoute('Accueil', 'fa fa-home', 'app_home');
         yield MenuItem::section('Cours');
         yield MenuItem::linkToCrud('Theme', 'fa-solid fa-folder', Theme::class);
-        yield MenuItem::linkToCrud('Lesson', 'fa-solid fa-folder', Lesson::class);
+        yield MenuItem::linkToCrud('Cursus', 'fa-solid fa-book', Cursus::class);
+        yield MenuItem::linkToCrud('Lesson', 'fa-solid fa-file-lines', Lesson::class);
+
     }
 }

@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Cursus;
 use App\Entity\Lesson;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -17,6 +18,8 @@ use Symfony\Component\Validator\Constraints\File;
 
 class LessonCrudController extends AbstractCrudController
 {
+    use  Trait\ReadOnlyTrait;
+    
     public static function getEntityFqcn(): string
     {
         return Lesson::class;
@@ -48,13 +51,17 @@ class LessonCrudController extends AbstractCrudController
                 ])
                 ->setRequired(false),
 
+                AssociationField::new('cursus')
+                    ->setCrudController(CursusCrudController::class)
+                    ->setLabel('Cursus')
+                    ->setFormTypeOptions(['placeholder' => 'Selectionner un cursus ']),
+                
             DateTimeField::new('createdAt', 'Créer le ')
                 ->onlyOnIndex(),
             DateTimeField::new('updatedAt', 'Mis à jour le')
                 ->onlyOnIndex(),
 
-            CollectionField::new('cursus')
-        
+            
             
         ];
     }
