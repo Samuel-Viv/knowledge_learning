@@ -37,6 +37,9 @@ class Lesson
     #[ORM\JoinColumn(name: "id_cursus", referencedColumnName: "id_cursus")]
     private ?Cursus $cursus = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
+
     public function getIdLesson(): ?int
     {
         return $this->id_lesson;
@@ -144,5 +147,17 @@ class Lesson
     public function __toString():string
     {
         return $this->getNameLesson();
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
     }
 }

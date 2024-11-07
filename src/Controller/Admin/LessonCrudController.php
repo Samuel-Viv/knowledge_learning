@@ -6,14 +6,12 @@ use App\Entity\Cursus;
 use App\Entity\Lesson;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
 use Symfony\Component\Validator\Constraints\File;
 
 class LessonCrudController extends AbstractCrudController
@@ -50,11 +48,12 @@ class LessonCrudController extends AbstractCrudController
                     ]),
                 ])
                 ->setRequired(false),
+            TextField::new('description'),
 
-                AssociationField::new('cursus')
-                    ->setCrudController(CursusCrudController::class)
-                    ->setLabel('Cursus')
-                    ->setFormTypeOptions(['placeholder' => 'Selectionner un cursus ']),
+            AssociationField::new('cursus')
+                ->setCrudController(CursusCrudController::class)
+                ->setLabel('Cursus')
+                ->setFormTypeOptions(['placeholder' => 'Selectionner un cursus ']),
                 
             DateTimeField::new('createdAt', 'Créer le ')
                 ->onlyOnIndex(),

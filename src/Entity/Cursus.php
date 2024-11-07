@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CursusRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CursusRepository::class)]
@@ -37,6 +38,12 @@ class Cursus
      */
     #[ORM\OneToMany(targetEntity: Lesson::class, mappedBy: 'cursus')]
     private Collection $lesson;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $images = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $description = null;
 
     public function __construct()
     {
@@ -156,5 +163,29 @@ class Cursus
     public function __toString():string
     {
         return $this->getNameCursus();
+    }
+
+    public function getImages(): ?string
+    {
+        return $this->images;
+    }
+
+    public function setImages(?string $images): static
+    {
+        $this->images = $images;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): static
+    {
+        $this->description = $description;
+
+        return $this;
     }
 }
