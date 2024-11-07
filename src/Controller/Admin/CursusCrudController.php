@@ -8,8 +8,10 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use Symfony\Component\Validator\Constraints\File;
 
 class CursusCrudController extends AbstractCrudController
 {
@@ -32,9 +34,29 @@ class CursusCrudController extends AbstractCrudController
                 ->setCrudController(ThemeCrudController::class)
                 ->setLabel('Thème')
                 ->setFormTypeOptions(['placeholder' => 'Selectionner un theme ']),
+
+            ImageField::new('images')
+                ->setUploadDir('public/assets/uploads/images')
+                ->setBasePath('/uploads/images')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setFileConstraints([
+                    new File([
+                        'maxSize' => '100M',               
+                        'mimeTypes' => [
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/png',                 
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (jpg, jpeg, png)',
+                        'maxSizeMessage' => 'Veuillez télécharger une image valide 100M maximum'
+                    ]),
+                ])
+                ->setRequired(false),
+            TextField::new('description'),
             
             CollectionField::new('lesson')
-                ->hideWhenCreating(),
+                ->hideWhenCreating()
+                ->hideWhenUpdating(),
 
             DateTimeField::new('createdAt', 'Créer le ')
                 ->hideOnForm()

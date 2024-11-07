@@ -1,0 +1,28 @@
+.btn{
+    height: 40px;
+    width: 150px;
+   background-color: #00497c !important;
+    border: #00497c 1px solid;
+    color: white;
+    border-radius: 50px;
+    margin: 5px;
+}
+
+.button{
+    display: flex;
+    justify-content: center;
+}
+
+video{
+    width: 100% !important;
+}
+
+.block{
+    display: flex;
+    flex-direction: column;
+}
+
+.block-center{
+    text-align: start;
+    
+}
