@@ -21,7 +21,7 @@ class FormationController extends AbstractController
         ]);
     }
 
-    #[Route('/cursus/lesson/{id_lesson}', name:'app_cursus', requirements:['id_lesson' => '\d+'])]
+    #[Route('/formation/cursus/lesson/{id_lesson}', name:'app_cursus', requirements:['id_lesson' => '\d+'])]
     public function detailLesson(int $id_lesson,LessonRepository $lessonRepository)
     {
         $lesson = $lessonRepository->find($id_lesson);
