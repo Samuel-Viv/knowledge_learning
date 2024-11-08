@@ -1,42 +1,55 @@
-{% extends 'base.html.twig' %} {% block title %}Les formations{% endblock %} {% block
-body %}
+{% extends 'base.html.twig' %} {% block title %}Les formations{% endblock %} {% block body %}
 <link rel="stylesheet" href="{{ asset('assets/css/formationIndex.css') }}" type="text/css" />
 
 <div class="container my-3">
   <div class="row">
     <h1>Nos Formations</h1>
 
+    <div class="text-center">
+      <div class="separation"></div>
+    </div>
     {% for theme in themes %}
 
     <h2 class="mt-3">{{ theme.nameTheme }}:</h2>
 
     {% for cursus in theme.cursuses %}
     <div class="card my-2">
-      <div class="card-title">
-        <h3>{{ cursus.nameCursus }}</h3>
-        <img class="image-cursus" src="{{ asset('assets/uploads/images/' ~ cursus.images) }}" alt="{{cursus.nameCursus}}">
+      <div class="card-title mt-3">
+        <div class="d-flex justify-content-evenly">
+          <h3>{{ cursus.nameCursus }}</h3>
+        </div>
+      </div>
+      <img
+        class="image-cursus"
+        src="{{ asset('assets/uploads/images/' ~ cursus.images) }}"
+        alt="{{ cursus.nameCursus }}"
+      />
 
-        <p>{{cursus.description}}</p>
+      <p class="mt-2">{{ cursus.description }}</p>
 
-        <div class="d-flex flex-row ">
+      <div class="d-flex flex-row">
         {% for lesson in cursus.lesson %}
         <div class="col-md-6">
-        <div class="d-flex flex-column mx-2 p-2 card card-lesson">
-        <h4>{{ lesson.nameLesson }}</h4>
+          <div class="d-flex flex-column mx-2 p-3 card card-lesson">
+            <h4>{{ lesson.nameLesson }}</h4>
+            <div class="d-flex justify-content-between">
+              <p>{{ lesson.description }}</p>
+              <p>{{ lesson.Price }}€</p>
+            </div>
 
-        <p>{{lesson.description}}</p>
-
-        <div class="button">
-        <a href="{{ path('app_cursus', { id_lesson: lesson.idLesson }) }}" class="btn"
-          >Voir les cours</a
-        >
-        <a href="" class="btn">Acheter le cour</a>
+            <div class="button">
+              <a href="{{ path('app_cursus', { id_lesson: lesson.idLesson }) }}" class="btn"
+                >Voir les cours</a
+              >
+              <a href="" class="btn">Acheter le cour</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
       </div>
-      </div></div>
-        {% endfor %}</div>
-      </div>
-      <div class="text-center">
-      <a href="" class="btn mb-2">Acheter tout le cursus</a>
+      <div class="d-flex justify-content-evenly text-center mt-2">
+        <p>L'ensemble du cursus coute {{ cursus.Price }}€</p>
+        <a href="" class="btn mb-2">Acheter tout le cursus</a>
       </div>
     </div>
     {% endfor %} {% endfor %}

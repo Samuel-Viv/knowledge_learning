@@ -29,3 +29,10 @@ h3{
 .card-lesson{
     background-color: #f1f8fc;
 }
+
+.separation {
+    height: 2px;
+    background-color: #82b864;
+    margin: 10px auto;
+    width: 50vw;
+}

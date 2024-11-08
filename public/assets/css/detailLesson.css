@@ -20,9 +20,17 @@ video{
 .block{
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .block-center{
     text-align: start;
     
+}
+
+.separation {
+    height: 2px;
+    background-color: #82b864;
+    margin: 10px auto;
+    width: 50vw;
 }
