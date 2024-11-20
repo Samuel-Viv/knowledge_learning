@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+
+<link rel="stylesheet" href="{{ asset('assets/css/cart.css') }}" type="text/css" />
+
+<div class="container">
+    <div class="row">
+        
+        <h1>Panier</h1>
+
+        <div class="text-center">
+            <div class="separation"></div>
+        </div>
+        
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom de l'élèment</th>
+                <th>Prix</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        {% for item in cartItems%}
+
+    <tbody>
+        <tr>
+            <td>
+                {% if item.cursus %}
+                    {{ item.cursus.nameCursus }} 
+                {% elseif item.lesson %}
+                    {{ item.lesson.nameLesson }} 
+                {% endif %}
+            </td>
+
+            <td>
+                {% if item.cursus %}
+                    {{ item.cursus.price }} €
+                {% elseif item.lesson %}
+                    {{ item.lesson.price }} €
+                {% endif %}
+            </td>
+
+            <td>
+                <form action="{{ path('remove_cart_item', {id_cart: item.idCart}) }}" method="post">
+                    
+                    <button type="submit" class="delete">Retirer</button>
+                </form>
+            </td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+    
+    <div class="button">
+        <a href="" class="btn">valider la commande</a>
+    </div>
+    
+   </div>
+</div>
+{% endblock %}

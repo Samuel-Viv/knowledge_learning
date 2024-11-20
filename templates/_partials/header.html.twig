@@ -28,6 +28,7 @@
               </li>
               {% endif %}
               <li class="nav-item"><a href="{{ path('app_formation') }}" class="nav-link {% if app.request.get('_route') == 'app_formation'%}active{% endif%}">Formation</a></li>
+              <li class="nav-item"><a href="{{ path('app_cart') }}" class="nav-link {% if app.request.get('_route') == 'app_cart'%}active{% endif%}">Panier</a></li>
               <li class="nav-item"><a href="{{ path('app_logout') }}" class="nav-link {% if app.request.get('_route') == 'app_logout'%}active{% endif%}">Déconnexion</a></li>
               {% else %}
               <li class="nav-item"><a href="{{ path('app_login') }}" class="nav-link {% if app.request.get('_route') == 'app_login'%}active{% endif%}">Connexion</a></li>
