@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Purchase;
 use App\Repository\CartRepository;
 use App\Service\StripeService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +17,7 @@ class CheckoutController extends AbstractController
 
     
     #[Route('/create-checkout-session', name: 'app_checkout')]
-    public function createCheckoutSession(Request $request, CartRepository $cartRepository, StripeService $stripeService): Response
+    public function createCheckoutSession(Request $request, CartRepository $cartRepository, StripeService $stripeService, EntityManagerInterface $em): Response
     {
        $user = $this->getUser();
        $cartItems = $cartRepository->findBy(['user' =>$user]);
@@ -26,17 +28,39 @@ class CheckoutController extends AbstractController
             $this->generateUrl('cancel_payment', [], UrlGeneratorInterface::ABSOLUTE_URL),
        );
 
+       //Enregistrement des achats
+       foreach ($cartItems as $item){
+            $purchase = new Purchase();
+            $purchase->setUser($user);
+            $purchase->setPurchaseAt(new \DateTimeImmutable());
+            if ($item->getCursus()){
+                $purchase->setCursus($item->getCursus());
+            }elseif ($item->getLesson()){
+                $purchase->setLesson($item->getLesson());
+            }
+            $em->persist($purchase);
+       }
+       $em->flush();
+
        return $this->redirect($session->url);
     }
 
     #[Route('/success_payment',name:'success_payment')]
-    public function successPayment()
+    public function successPayment(CartRepository $cartRepository, EntityManagerInterface $em): Response
     {
+        $user = $this-> getUser();
+        $cartItems = $cartRepository->findBy(['user' => $user]);
+
+        foreach($cartItems as $item){
+            $em->remove($item);
+        }
+        $em->flush();
+
         return $this->render('checkout/success_payment.html.twig');
     }
 
     #[Route('/cancel_payment',name:'cancel_payment')]
-    public function cancelPayment()
+    public function cancelPayment(): Response
     {
         return $this->render('checkout/cancel_payment.html.twig');
     }
