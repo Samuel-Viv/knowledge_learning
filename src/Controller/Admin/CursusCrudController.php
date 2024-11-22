@@ -29,7 +29,9 @@ class CursusCrudController extends AbstractCrudController
             IdField::new('id_cursus')
                 ->onlyOnIndex(),
             TextField::new('name_cursus'),
-            MoneyField::new('price')->setCurrency('EUR'),
+            MoneyField::new('price')
+                ->setCurrency('EUR')
+                ->setStoredAsCents(false),
             AssociationField::new('theme')
                 ->setCrudController(ThemeCrudController::class)
                 ->setLabel('Thème')

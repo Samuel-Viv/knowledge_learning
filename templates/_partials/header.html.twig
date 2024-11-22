@@ -18,8 +18,9 @@
 
           <div class="collapse navbar-collapse header-nav" id="navbarNav">
             <ul class="navbar-nav ms-auto liste my-4">
-                <li class="nav-item"><a href="{{ path('app_home') }}" class="nav-link {% if app.request.get('_route') == 'app_home'%}active{% endif%}">Accueil</a></li>  
-
+              {%if not app.user%}
+              <li class="nav-item"><a href="{{ path('app_home') }}" class="nav-link {% if app.request.get('_route') == 'app_home'%}active{% endif%}">Accueil</a></li>  
+              {%endif%}
               {% if app.user %} 
 
               {% if 'ROLE_ADMIN' in app.user.roles %}

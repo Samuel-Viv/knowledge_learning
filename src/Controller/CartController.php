@@ -47,10 +47,7 @@ class CartController extends AbstractController
         //Recherche des entité dans la base de donné 
         $cursus = $cursusId ? $em -> getRepository(Cursus::class)->find($cursusId): null;
         $lesson = $lessonId ? $em -> getRepository(Lesson::class)->find($lessonId): null;
-            //Si Introuvable message d'erreur
-            if (!$cursus && !$lesson){
-                throw new \InvalidArgumentException('Cursus ou leçon introuvable');
-            }
+       
 
         //Recherche si l'élèment existe deja dans le panier de l'utilisateur
         $cartItem = $em->getRepository(Cart::class)->findOneBy([
@@ -75,7 +72,7 @@ class CartController extends AbstractController
             $em->persist($cartItem);
             $em->flush();
         } catch (\Doctrine\DBAL\Exception\UniqueConstraintViolationException $e) {
-            $this->addFlash('warning', 'Cet élément est déjà dans votre panier.');
+            $this->addFlash('error', 'Cet élément est déjà dans votre panier.');
             return $this->redirectToRoute('cart_index');
         }
 
@@ -96,7 +93,7 @@ class CartController extends AbstractController
         //suppression de l'élément
         $em->remove($cartItem);
         $em->flush();
-        $this->addFlash('sucess', 'L\'élément à bien était supprimer de votre panier!');
+        $this->addFlash('success', 'L\'élément à bien était supprimer de votre panier!');
 
         return $this->redirectToRoute('app_cart');
     }

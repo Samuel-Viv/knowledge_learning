@@ -30,7 +30,9 @@ class LessonCrudController extends AbstractCrudController
             IdField::new('id_lesson')
                 ->onlyOnIndex(),
             TextField::new('name_lesson'),
-            MoneyField::new('price')->setCurrency('EUR'),
+            MoneyField::new('price')
+                ->setCurrency('EUR')
+                ->setStoredAsCents(false),
             TextareaField::new('content'),
             
             ImageField::new('video_url')
