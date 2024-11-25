@@ -30,7 +30,7 @@ class CartController extends AbstractController
     }
 
 
-    #[Route(name:'add_cart')]
+    #[Route('/cart/add',name:'add_cart')]
     public function addToCart(Request $request, EntityManagerInterface $em, Security $security): Response
     {
         //Verification si l'utilisateur est connecté
