@@ -53,6 +53,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Purchase::class, mappedBy: 'user')]
     private Collection $purchases;
 
+    /**
+     * @var Collection<int, Certification>
+     */
+    #[ORM\OneToMany(targetEntity: Certification::class, mappedBy: 'user')]
+    private Collection $certifications;
+
     public function getId(): ?int
     {
         return $this->id_user;
@@ -76,6 +82,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->createdAt = new \DateTimeImmutable();
         $this->updatedAt = new \DateTimeImmutable();
         $this->purchases = new ArrayCollection();
+        $this->certifications = new ArrayCollection();
     }
     /**
      * A visual identifier that represents this user.
@@ -207,6 +214,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($purchase->getUser() === $this) {
                 $purchase->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Certification>
+     */
+    public function getCertifications(): Collection
+    {
+        return $this->certifications;
+    }
+
+    public function addCertification(Certification $certification): static
+    {
+        if (!$this->certifications->contains($certification)) {
+            $this->certifications->add($certification);
+            $certification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCertification(Certification $certification): static
+    {
+        if ($this->certifications->removeElement($certification)) {
+            // set the owning side to null (unless already changed)
+            if ($certification->getUser() === $this) {
+                $certification->setUser(null);
             }
         }
 
