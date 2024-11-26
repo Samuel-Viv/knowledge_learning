@@ -56,6 +56,24 @@ class LessonCrudController extends AbstractCrudController
                 ->setCrudController(CursusCrudController::class)
                 ->setLabel('Cursus')
                 ->setFormTypeOptions(['placeholder' => 'Selectionner un cursus ']),
+
+            ImageField::new('certificationImage')
+                ->setUploadDir('public/assets/uploads/images/certification')
+                ->setBasePath('/uploads/images/certification')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setFileConstraints([
+                    new File([
+                        'maxSize' => '100M',               
+                        'mimeTypes' => [
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/png',                 
+                        ],
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide (jpg, jpeg, png)',
+                        'maxSizeMessage' => 'Veuillez télécharger une image valide 100M maximum'
+                    ]),
+                ])
+                ->setRequired(false),
                 
             DateTimeField::new('createdAt', 'Créer le ')
                 ->onlyOnIndex(),

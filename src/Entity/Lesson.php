@@ -40,6 +40,9 @@ class Lesson
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $certificationImage = null;
+
     public function getIdLesson(): ?int
     {
         return $this->id_lesson;
@@ -157,6 +160,18 @@ class Lesson
     public function setDescription(?string $description): static
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getCertificationImage(): ?string
+    {
+        return $this->certificationImage;
+    }
+
+    public function setCertificationImage(?string $certificationImage): static
+    {
+        $this->certificationImage = $certificationImage;
 
         return $this;
     }
