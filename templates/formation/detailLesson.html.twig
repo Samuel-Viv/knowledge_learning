@@ -16,9 +16,24 @@
         <video src="{{ asset('assets/uploads/videos/' ~ lesson.videoUrl) }}" controls></video>
       </div>
 
-      <div class="button">
-        <button type="submit " class="btn mt-3">Valider le cour</button>
+      {% if certification %}
+      <div class="mt-2 certification text-center">
+        
+          <h2 class="titre-certif">Certification Obtenue ! </h2>
+        
+        <div class="block-certif">
+          <img class="certification-img" src="{{ asset('assets/uploads/images/certification/'~ lesson.certificationImage) }}" alt="{{lesson.nameLesson}}">
+          <p>  Obtenue le : {{ certification.obtainedAt ? certification.obtainedAt|date('d-m-Y') : 'N/A' }}</p>
+        </div>
       </div>
+      {% else %}
+       <form action="{{ path('validate_lesson', {id_lesson: lesson.idLesson})}}" method="post">
+          <div class="button">
+            <button type="submit " class="btn mt-3">Valider la leçon</button>
+          </div>
+       </form>
+      {% endif %}
+      
     </div>
   </div>
 </div>

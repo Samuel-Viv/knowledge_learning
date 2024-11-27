@@ -17,12 +17,13 @@ class Certification
     #[ORM\JoinColumn(name: 'id_user', referencedColumnName: 'id_user', nullable: false)]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(targetEntity: Cursus::class)]
-    #[ORM\JoinColumn(name: 'id_cursus', referencedColumnName: 'id_cursus', nullable: false)]
-    private ?Cursus $cursus = null;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $obtainedAt = null;
+
+    #[ORM\ManyToOne(targetEntity:Lesson::class)]
+    #[ORM\JoinColumn(name:'id_lesson', referencedColumnName:'id_lesson' ,nullable: false)]
+    private ?Lesson $lesson = null;
 
     public function getIdCertification(): ?int
     {
@@ -41,17 +42,6 @@ class Certification
         return $this;
     }
 
-    public function getCursus(): ?Cursus
-    {
-        return $this->cursus;
-    }
-
-    public function setCursus(?Cursus $cursus): static
-    {
-        $this->cursus = $cursus;
-
-        return $this;
-    }
 
     public function getObtainedAt(): ?\DateTimeImmutable
     {
@@ -61,6 +51,18 @@ class Certification
     public function setObtainedAt(\DateTimeImmutable $obtainedAt): static
     {
         $this->obtainedAt = $obtainedAt;
+
+        return $this;
+    }
+
+    public function getLesson(): ?Lesson
+    {
+        return $this->lesson;
+    }
+
+    public function setLesson(?Lesson $lesson): static
+    {
+        $this->lesson = $lesson;
 
         return $this;
     }
