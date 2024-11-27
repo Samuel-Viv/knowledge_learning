@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
-
+use App\Entity\Certification;
+use App\Repository\CertificationRepository;
 use App\Repository\LessonRepository;
 use App\Repository\PurchaseRepository;
 use App\Repository\ThemeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -68,7 +70,7 @@ class FormationController extends AbstractController
     }
 
     #[Route('/formation/cursus/lesson/{id_lesson}', name:'app_cursus', requirements:['id_lesson' => '\d+'])]
-    public function detailLesson(int $id_lesson,LessonRepository $lessonRepository, PurchaseRepository $purchaseRepository)
+    public function detailLesson(int $id_lesson,LessonRepository $lessonRepository, PurchaseRepository $purchaseRepository, CertificationRepository $certificationRepository)
     {
         $user = $this->getUser();
         $lesson = $lessonRepository->find($id_lesson);
@@ -87,9 +89,33 @@ class FormationController extends AbstractController
             }
             
         }
+
+        //Verifie si l'utilisateur a la certification de la leçon
+
+        $certification = $certificationRepository->findOneBy(['user'=>$user, 'lesson'=>$lesson]);
         return $this->render('formation/detailLesson.html.twig',[
-            'lesson'=> $lesson
+            'lesson'=> $lesson,
+            'certification'=>$certification,
         ]);
+    }
+
+    #[Route('/formation/cursus/lesson/{id_lesson}/validate', name:'validate_lesson', methods:['POST'])]
+    public function validateLesson(int $id_lesson, LessonRepository $lessonRepository, CertificationRepository $certificationRepository, EntityManagerInterface $em):Response
+    {
+        $user = $this->getUser();
+        $lesson = $lessonRepository->find($id_lesson);
+
+        $certification = $certificationRepository->findOneBy(['user'=>$user, 'lesson'=>$lesson]);
+        if(!$certification){
+            $certification = new Certification();
+            $certification ->setUser($user);
+            $certification ->setLesson($lesson);
+            $certification ->setObtainedAt(new \DateTimeImmutable);
+            $em->persist($certification);
+            $em->flush();
+        }
+        $this->addFlash('success', 'Félicition vous venez de valider une leçon. Vous venez de recevoir une certification!! ');
+        return $this-> redirectToRoute('app_cursus', ['id_lesson' => $id_lesson]);
     }
 }
 
