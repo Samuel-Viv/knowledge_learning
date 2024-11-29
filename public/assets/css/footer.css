@@ -3,7 +3,7 @@
     justify-content: space-evenly;
     align-items: center;
     padding: 10px 20px;
-    background-color: #f1f8fc;
+    background-color: #f1f8fc !important;
 }
 
 .footer-logo img {
@@ -17,4 +17,8 @@
     font-size: 1.25rem;
     font-weight: bold;
     margin-bottom: 1.5em;
+}
+
+.logo{
+    background-color: #f1f8fc !important;
 }

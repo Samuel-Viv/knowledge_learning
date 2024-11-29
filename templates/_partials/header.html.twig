@@ -30,7 +30,15 @@
               {% endif %}
               <li class="nav-item"><a href="{{ path('app_formation') }}" class="nav-link {% if app.request.get('_route') == 'app_formation'%}active{% endif%}">Formation</a></li>
               <li class="nav-item"><a href="{{ path('app_cart') }}" class="nav-link {% if app.request.get('_route') == 'app_cart'%}active{% endif%}">Panier</a></li>
-              <li class="nav-item"><a href="{{ path('app_logout') }}" class="nav-link {% if app.request.get('_route') == 'app_logout'%}active{% endif%}">Déconnexion</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Profil
+                </a>
+                <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="navbarDropdownMenuLink">
+                  <a href="{{path('app_certifications')}}" class="nav-link {% if app.request.get('_route') == 'app_certifications'%}active{% endif%} mb-2">Certifications</a>
+                  <a href="{{ path('app_logout') }}" class="nav-link {% if app.request.get('_route') == 'app_logout'%}active{% endif%} ">Déconnexion</a>
+                </div>
+              </li>
               {% else %}
               <li class="nav-item"><a href="{{ path('app_login') }}" class="nav-link {% if app.request.get('_route') == 'app_login'%}active{% endif%}">Connexion</a></li>
 
