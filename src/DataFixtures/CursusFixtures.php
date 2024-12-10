@@ -38,8 +38,8 @@ class CursusFixtures extends Fixture
                 -> setTheme($themeMusique)
                 -> setImages('1a5ac707167ca8ef325246145a2271dfe06567da.jpg')
                 -> setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Non quis mollitia velit quod rem porro, enim sapiente nobis sed amet maxime. Soluta assumenda quis earum, veniam fugit nobis sint officia?')
-                ->setCreatedAt(new DateTimeImmutable())
-                ->setUpdatedAt(new DateTimeImmutable());
+                ->setCreatedAt(new \DateTimeImmutable())
+                ->setUpdatedAt(new \DateTimeImmutable());
         $manager-> persist($guitare);
 
         $piano=new Cursus();
@@ -48,8 +48,8 @@ class CursusFixtures extends Fixture
                 -> setTheme($themeMusique)
                 -> setImages('1a5ac707167ca8ef325246145a2271dfe06567da.jpg')
                 -> setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Non quis mollitia velit quod rem porro, enim sapiente nobis sed amet maxime. Soluta assumenda quis earum, veniam fugit nobis sint officia?')
-                ->setCreatedAt(new DateTimeImmutable())
-                ->setUpdatedAt(new DateTimeImmutable());
+                ->setCreatedAt(new \DateTimeImmutable())
+                ->setUpdatedAt(new \DateTimeImmutable());
         $manager-> persist($piano);
 
         //Cursus Informatique
@@ -59,8 +59,8 @@ class CursusFixtures extends Fixture
                 -> setTheme($themeInformatique)
                 -> setImages('1a5ac707167ca8ef325246145a2271dfe06567da.jpg')
                 -> setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Non quis mollitia velit quod rem porro, enim sapiente nobis sed amet maxime. Soluta assumenda quis earum, veniam fugit nobis sint officia?')
-                ->setCreatedAt(new DateTimeImmutable())
-                ->setUpdatedAt(new DateTimeImmutable());
+                ->setCreatedAt(new \DateTimeImmutable())
+                ->setUpdatedAt(new \DateTimeImmutable());
         $manager-> persist($web);
 
 
@@ -71,8 +71,8 @@ class CursusFixtures extends Fixture
                 -> setTheme($themeJardinage)
                 -> setImages('1a5ac707167ca8ef325246145a2271dfe06567da.jpg')
                 -> setDescription('Lorem ipsum dolor sit amet consectetur adipisicing elit. Non quis mollitia velit quod rem porro, enim sapiente nobis sed amet maxime. Soluta assumenda quis earum, veniam fugit nobis sint officia?')
-                ->setCreatedAt(new DateTimeImmutable())
-                ->setUpdatedAt(new DateTimeImmutable());
+                ->setCreatedAt(new \DateTimeImmutable())
+                ->setUpdatedAt(new \DateTimeImmutable());
         $manager-> persist($jardinage);
 
         //Cursus Cuisine

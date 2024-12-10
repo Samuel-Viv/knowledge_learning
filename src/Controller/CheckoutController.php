@@ -28,20 +28,6 @@ class CheckoutController extends AbstractController
             $this->generateUrl('cancel_payment', [], UrlGeneratorInterface::ABSOLUTE_URL),
        );
 
-       //Enregistrement des achats
-       foreach ($cartItems as $item){
-            $purchase = new Purchase();
-            $purchase->setUser($user);
-            $purchase->setPurchaseAt(new \DateTimeImmutable());
-            if ($item->getCursus()){
-                $purchase->setCursus($item->getCursus());
-            }elseif ($item->getLesson()){
-                $purchase->setLesson($item->getLesson());
-            }
-            $em->persist($purchase);
-       }
-       $em->flush();
-
        return $this->redirect($session->url);
     }
 
@@ -51,7 +37,16 @@ class CheckoutController extends AbstractController
         $user = $this-> getUser();
         $cartItems = $cartRepository->findBy(['user' => $user]);
 
-        foreach($cartItems as $item){
+        foreach($cartItems as $item){ 
+            $purchase = new Purchase();
+            $purchase->setUser($user);
+            $purchase->setPurchaseAt(new \DateTimeImmutable());
+            if ($item->getCursus()){
+                $purchase->setCursus($item->getCursus());
+            }elseif ($item->getLesson()){
+                $purchase->setLesson($item->getLesson());
+            }
+            $em->persist($purchase);
             $em->remove($item);
         }
         $em->flush();
