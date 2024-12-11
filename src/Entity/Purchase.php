@@ -2,11 +2,20 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
 use App\Repository\PurchaseRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PurchaseRepository::class)]
 #[ORM\HasLifecycleCallbacks]
+#[ApiResource(
+    operations:[
+       new GetCollection(),
+       new Get()
+    ]
+)]
 class Purchase
 {
     #[ORM\Id]
