@@ -2,12 +2,25 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 use App\Repository\CartRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CartRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 #[ORM\UniqueConstraint(name:'unique_cart_item', columns:['id_user', 'id_cursus', 'id_lesson'])]
+#[ApiResource(
+    operations:[
+        new GetCollection(),
+        new Get(),
+        new Post(),
+        new Delete()
+    ]
+)]
 class Cart
 {
     #[ORM\Id]

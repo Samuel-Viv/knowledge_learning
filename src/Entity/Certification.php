@@ -2,10 +2,21 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 use App\Repository\CertificationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CertificationRepository::class)]
+#[ApiResource(
+    operations:[
+        new GetCollection(),
+        new Get(),
+        new Post()
+    ]
+)]
 class Certification
 {
     #[ORM\Id]
