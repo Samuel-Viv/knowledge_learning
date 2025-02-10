@@ -28,7 +28,7 @@ Création des fixtures:
 Message d'erreur lorsque vous etes dans la partie admin est que vous voulez allez sur la base de donnée Cursus ou Lesson. Vous devez modifier votre fichier php.ini ";extension=intl" vous devez enlever le ";" .
 
 5/ Faire les tests unitaire
- - Vous devrait écrire dans le terminal 'php bin/console doctrine:database:create --env=test'.
+ - Vous devez écrire dans le terminal 'php bin/console doctrine:database:create --env=test'.
  - Ensuite 'php bin/console doctrine:schema:update --force --env=test'.
  - 'php bin/console doctrine:fixtures:load --env=test'.
  - Et enfin pour lancer les tests 'php bin/phpunit'.
